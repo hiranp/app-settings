@@ -1,0 +1,19 @@
+# https://hello.atlassian.net/wiki/spaces/CORE/pages/167276158/HOWTO+-+Install+and+Use+Cloudtoken.
+defaults:
+  mfa-method: passcode
+  centrify:
+    appkey: [TODO]
+    auth_preferences:
+    - Passcode
+    - Password
+    - MFA (US-East-1)
+    tenant_id: [TODO]
+    vanity_id: atlassian
+plugins:
+  pre_auth: null
+  auth:
+  - centrify
+  - saml
+  post_auth:
+  - export_credentials_shell
+  - export_credentials_json

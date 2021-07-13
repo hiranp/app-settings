@@ -1,0 +1,24 @@
+- hosts: localhost
+  tasks:    
+    - homebrew:
+        name: zsh
+    - name: Install oh-my-zsh
+      shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"  
+    - name: Set up personal workspace
+      shell: |
+        cd ~ 
+        mkdir -p personal_workspace
+        cd ~/personal_workspace
+        [ -d "~/settings_files" ] && git clone https://github.com/boyan-soubachov/settings_files.git
+        cd settings_files
+        git pull
+        cp .vimrc ~/
+        cp .zshrc ~/ 
+    
+    - homebrew:
+        name: go,python,vim,hg
+
+    - homebrew_cask:
+        name: docker,skype,whatsapp,monitorcontrol,multitouch,visual-studio-code,insomnia,transmission,virtualbox
+    
+    - include: atlassian_tasks.yml
