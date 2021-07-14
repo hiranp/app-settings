@@ -128,18 +128,19 @@ alias doc="cd ~/Documents"
 # Docker images
 alias run-hue='docker run -it -p 8888:8888 gethue/hue:latest'
 
-# Gluent AWS
-alias dev-reboot='~/bin/ec2cli --no-warning -ii=i-0a7a7e2472545f7e5 reboot'
-alias dev-start='~/bin/ec2cli --no-warning -ii=i-0a7a7e2472545f7e5 start'
-alias dev-status='~/bin/ec2cli --no-warning -ii=i-0a7a7e2472545f7e5 status'
-alias dev-stop='~/bin/ec2cli --no-warning -ii=i-0a7a7e2472545f7e5 stop'
+# Dev AWS
+export server_id = "1-xxxx"
+alias dev-reboot='~/bin/ec2cli --no-warning -ii=${server_id} reboot'
+alias dev-start='~/bin/ec2cli --no-warning -ii=${server_id} start'
+alias dev-status='~/bin/ec2cli --no-warning -ii=${server_id} status'
+alias dev-stop='~/bin/ec2cli --no-warning -ii=${server_id} stop'
 alias aws-status='~/bin/ec2cli --launched-after-hours-ago=12 -is="running" status'
-alias devinst='ssh -i ~/.ssh/id_aws_hp oracle@10.45.1.243'
-#alias put-files="rsync -ravze "ssh -i ~/.ssh/id_aws_hp" ~/MyCode/AwsSync oracle@10.45.1.243:~"
-#alias get-files="rsync -ravze "ssh -i ~/.ssh/id_aws_hp" oracle@10.45.1.243:~/AwsSync ~/MyCode/"
+alias devinst='ssh -i ~/.ssh/id_aws_hp oracle@<server_ip>'
+#alias put-files="rsync -ravze "ssh -i ~/.ssh/id_aws_hp" ~/MyCode/AwsSync oracle@<server_ip>:~"
+#alias get-files="rsync -ravze "ssh -i ~/.ssh/id_aws_hp" oracle@<server_ip>:~/AwsSync ~/MyCode/"
 # rsync -aHAXxv --numeric-ids --delete --progress -e "ssh -T -c arcfour -o Compression=no -x" user@<source>:<source_dir> <dest_dir>
-alias dev-get="/usr/local/Cellar/rsync/3.2.3/bin/rsync -aHAXxv --numeric-ids --delete --update --progress -e 'ssh -T -c aes128-gcm@openssh.com -o Compression=no -x' oracle@10.45.1.243:~/AwsSync ~/MyCode/"
-alias dev-put="/usr/local/Cellar/rsync/3.2.3/bin/rsync -aHAXxv --numeric-ids --delete --update --progress -e 'ssh -T -c aes128-gcm@openssh.com -o Compression=no -x' ~/MyCode/AwsSync oracle@10.45.1.243:~/"
+alias dev-get="/usr/local/Cellar/rsync/3.2.3/bin/rsync -aHAXxv --numeric-ids --delete --update --progress -e 'ssh -T -c aes128-gcm@openssh.com -o Compression=no -x' oracle@<server_ip>:~/AwsSync ~/MyCode/"
+alias dev-put="/usr/local/Cellar/rsync/3.2.3/bin/rsync -aHAXxv --numeric-ids --delete --update --progress -e 'ssh -T -c aes128-gcm@openssh.com -o Compression=no -x' ~/MyCode/AwsSync oracle@<server_ip>:~/"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
